@@ -14,6 +14,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.nelioalves.cursomc.domain.enums.TipoCliente;
 
 @Entity
@@ -28,12 +29,13 @@ public class Cliente implements Serializable {
 	private String cpfOuCnpj;
 	private Integer tipo;
 	
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 
 	//Por ser uma entidade fraca, a decisão foi fazer um conjunto (set), pois não admite repetição
 	@ElementCollection //para o JPA mapear essa entidade fraca
-	@CollectionTable (name="telefone") //nome da tabela no banco
+	@CollectionTable (name="TELEFONE") //nome da tabela no banco
 	private Set<String> telefones = new HashSet<>();
 	
 	public Cliente () {
