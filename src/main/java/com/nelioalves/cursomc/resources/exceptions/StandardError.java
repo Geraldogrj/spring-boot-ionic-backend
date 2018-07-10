@@ -1,6 +1,9 @@
 package com.nelioalves.cursomc.resources.exceptions;
 
 import java.io.Serializable;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class StandardError implements Serializable {
 	private static final long serialVersionUID = 1L;
@@ -31,9 +34,16 @@ public class StandardError implements Serializable {
 	public void setMsg(String msg) {
 		this.msg = msg;
 	}
+	
+//	public Long getTimeStamp() {
+//		return timeStamp;
+//	}
 
-	public Long getTimeStamp() {
-		return timeStamp;
+	//Alterei esse get para que retornasse o String formatado
+	public String getTimeStamp() {
+		Date date = new Date (timeStamp);
+		Format format = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+		return format.format(date);
 	}
 
 	public void setTimeStamp(Long timeStamp) {
